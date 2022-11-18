@@ -24,7 +24,8 @@ async def build():
     arches = ["amd64", "arm64"]
 
     # initialize dagger client
-    async with dagger.Connection() as client:
+    cfg = dagger.Config(log_output=sys.stderr)
+    async with dagger.Connection(cfg) as client:
 
         # get reference to the local project
         src_id = await client.host().directory(".").id()
